@@ -1,0 +1,108 @@
+// Content
+
+.content {
+  font-family: $custom_font, $font-family-sans-serif;
+  
+  // Use base font for headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: $font-family-base;
+  }
+
+  // Hide h1 headings in content, its use is reserved for header
+  // If the markdown file has no frontmatter (e.g. README.md), Jekyll will use the first heading
+  // as page title, which would then appear in header and content. This avoids that.
+  h1 {
+    display: none;
+  }
+
+  // Add some space before h2, which are the main headings in content
+  h2 {
+    margin-top: 2rem;
+
+    // Don't add space if h2 is first element in content
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .anchorjs-link:hover {
+    text-decoration: none;
+  }
+
+  // Add extra padding between checkbox and item
+  .task-list-item-checkbox {
+    margin-right: 0.5rem;
+  }
+
+  // Style blockquotes
+  blockquote {
+    border-left: 0.25rem solid $gray-200;
+    color: $gray-600;
+    padding: 0 1rem;
+  }
+
+  // Add aliases for float-left / float-right
+  .float-left {
+    @extend .float-start;
+  }
+  .float-right {
+    @extend .float-end;
+  }
+
+  // Style images (excluding inline images not wrapped in p)
+  p {
+    img {
+      display: block;
+      height: auto;
+      margin-left: auto; // Mimick .mx-auto
+      margin-right: auto; // Mimick .mx-auto
+      max-width: 100%; // Mimick .img-fluid
+
+      // Add margin between floated img and text
+      &.float-start {
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      &.float-end {
+        margin-left: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    // Style captions
+    img + em {
+      display: block;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    // Add margin between floated paragraphs (often containing img) and text
+    &.float-left {
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    &.float-right {
+      margin-left: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  // Style embedded content (video, Twitter feed)
+  iframe {
+    margin-bottom: $headings-margin-bottom;
+  }
+
+  // Force Twitter timeline to remain in container
+  .twitter-timeline {
+    width: 100vw !important;
+  }
+
+  // Style tables
+  // This is done by replacing '<table' with '<table class="table"' in {{ content }}
+}

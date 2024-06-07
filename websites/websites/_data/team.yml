@@ -1,0 +1,37 @@
+# Project team members listed below will appear on the /team page
+
+- name: Aaron Wang
+  role: PhD Student at University of Luxembourg
+  description: > # Can be Markdown
+    Interested in graph stuffs. 
+    [Personal Website.](https://wang422003.github.io/)
+  orcid: 0000-0001-7809-0622
+  googlescholar: 03a5OXgAAAAJ
+  twitter: wang_aoran
+  github: wang422003
+  email: aoran.wang@uni.lu
+
+- name: Chaoli Zhang
+  role: Lecturer at Zhejiang Normal University 
+  description: >
+    Time Series Analysis, Machine Learning, Algorithmic Game Theory
+  googlescholar: 2bL2FJ0AAAAJ
+  github: ChaoLiZhang
+  email: chaolizcl@zjnu.edu.cn  
+
+- name: Jun Pang
+  role: Assistant Professor at the University of Luxembourg  
+  description: >
+    Formal methods, security and privacy, graph machine learning, computational systems biology, complex networks. [Personal Website.](https://satoss.uni.lu/members/jun/)
+  orcid: 0000-0002-4521-4112
+  googlescholar: 0JjOM_gAAAAJ
+  email: jun.pang@uni.lu
+
+- name: Qingsong Wen
+  role: Head of AI Research & Chief Scientist @ Squirrel AI  
+  description: >
+    AI for Time Series, AI for Education, Decision Intelligence. [Personal Website.](https://sites.google.com/site/qingsongwen8/)
+  googlescholar: vjPJvwYAAAAJ
+  twitter: qingsongedu
+  github: qingsongedu
+  email: qingsongedu@gmail.com

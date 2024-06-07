@@ -1,0 +1,72 @@
+// Theme overrides for Bootstrap variables
+// 
+// Compare with bootstrap/_variables.scss
+// Only include variables that are overwritten
+// or variables (indicated with !default) that are referred by other variables.
+
+// Color system
+
+$primary: $custom_link_color;
+$secondary: $custom_banner_color;
+$footer: $custom_footer_color; // Theme variable
+
+// Characters which are escaped by the escape-svg function
+// Options
+// Prefix for :root CSS variables
+// Gradient
+// Spacing
+
+$spacer: 1rem !default;
+
+// Position
+// Body
+// Utilities maps
+// Links
+
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+// Paragraphs
+// Grid breakpoints
+// Grid containers
+// Grid columns
+// Container padding
+// Components
+// Typography
+
+$font-family-base: "Roboto", sans-serif;
+
+$headings-margin-bottom: $spacer;
+
+// Tables
+// Buttons + Forms
+// Buttons
+// Forms
+// Form validation
+// Z-index master list
+// Navs
+// Navbar
+// Dropdowns
+// Pagination
+// Placeholders
+// Cards
+// Accordion
+// Tooltips
+// Popovers
+// Toasts
+// Badges
+
+$badge-font-weight: normal;
+
+// Modals
+// Alerts
+// Progress bars
+// List group
+// Image thumbnails
+// Figures
+// Breadcrumbs
+// Carousel
+// Spinners
+// Close
+// Offcanvas
+// Code

@@ -1,0 +1,41 @@
+{% if item.background.first %}
+  {% assign background = item.background.img %}
+{% else %}
+  {% assign background = item.background %}
+{% endif %}
+
+<div class="card" data-tags="{% for tag in item.tags %}{{ tag | downcase | strip }}|{% endfor %}">
+  <a href="{{ item.url | relative_url }}">
+    {% if item.background %}
+      <img class="card-img-top" src="{{ background | relative_url }}" alt="Background image">  
+    {% else %}
+      <div class="card-img-top bg-secondary"></div>
+    {% endif %}
+  </a>
+
+  <div class="card-body position-relative">
+    <h5 class="card-title">
+      <a class="stretched-link" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+    </h5>
+
+    {% if item.collection == 'posts' %}
+      <h6 class="card-subtitle">{{ item.date | date: '%B %d, %Y' }}</h6>
+    {% endif %}
+
+    <div class="card-text">
+      {% if item.description %}
+        {{ item.description | markdownify | strip_html | truncatewords: 20 }}
+      {% else %}
+        {{ item.excerpt | strip_html | truncatewords: 20 }}
+      {% endif %}
+    </div>
+  </div>
+
+  {% if item.collection == 'posts' and item.tags and site.archive_permalink %}
+    <div class="card-footer">
+      {% for tag in item.tags %}
+        <a class="badge{% if site.rounded_corners != false %} rounded-pill{% endif %}" href="{{ site.archive_permalink | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

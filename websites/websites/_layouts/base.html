@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+    {% include navbar.html %}
+
+    <main>
+      {% include header.html %}
+
+      <div class="container content">
+          
+        {{ content
+          | replace: '<table', '<div class="table-responsive"><table'
+          | replace: '</table>', '</table></div>'
+          | replace: '<table>', '<table class="table">'
+        }}
+
+      </div>
+    </main>
+
+    {% include footer.html %}
+
+  </body>
+</html>

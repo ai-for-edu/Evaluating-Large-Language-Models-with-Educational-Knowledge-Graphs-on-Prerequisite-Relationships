@@ -1,0 +1,38 @@
+// Footer
+
+body > footer {
+  background-color: $footer;
+  border-top: 5px solid lighten($footer, 50);
+  color: lighten($footer, 50);
+  font-size: 0.9rem;
+  padding: $grid-gutter-width / 2 0;
+
+  .container {
+    margin-top: 1rem;
+  }
+
+  a,
+  a:hover,
+  a:visited {
+    color: $white;
+  }
+
+  // Font Awesome icons
+  .fa-inverse {
+    color: $footer;
+  }
+  .fa-ul {
+    margin-left: 1.5rem;
+  }
+
+  // License notice
+  .small.mt-2 {
+    p {
+      display: inline;
+
+      & + p:before {
+        content: " — ";
+      }
+    }
+  } 
+}
