@@ -7,10 +7,11 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 4.3.2"
+gem "jekyll", "3.9.3" # Use the version required by github-pages
+gem "github-pages", "~> 228"
 gem "jekyll-sass-converter"
 gem "jekyll-seo-tag"
-gem "jekyll-feed", "~> 0.12" # Keep only one entry for jekyll-feed
+gem "jekyll-feed" # Remove any duplicate entries for jekyll-feed
 gem "jekyll-paginate"
 gem "jekyll-sitemap"
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
