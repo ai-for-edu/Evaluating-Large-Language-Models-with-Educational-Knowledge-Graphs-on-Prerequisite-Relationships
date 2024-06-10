@@ -25,3 +25,6 @@
 
 # Ignore Jekyll site output
 /websites/websites/_site
+
+
+vendor/bundle
