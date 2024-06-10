@@ -1,0 +1,30 @@
+# Ignore bundler config
+/websites/websites/.bundle
+
+# Ignore all logfiles and tempfiles within the Jekyll site
+/websites/websites/log
+/websites/websites/tmp
+/websites/websites/_site
+/websites/websites/.jekyll-metadata
+/websites/websites/.jekyll-cache
+/websites/websites/.sass-cache
+
+# Ignore byebug command history file
+/websites/websites/.byebug_history
+
+# Ignore node_modules and package-lock.json
+/websites/websites/node_modules
+/websites/websites/package-lock.json
+
+# Ignore vendor/bundle directory in websites/websites
+/websites/websites/vendor/bundle
+
+# Ignore other system files
+/websites/websites/.DS_Store
+/websites/websites/Thumbs.db
+
+# Ignore Jekyll site output
+/websites/websites/_site
+
+
+vendor/bundle
