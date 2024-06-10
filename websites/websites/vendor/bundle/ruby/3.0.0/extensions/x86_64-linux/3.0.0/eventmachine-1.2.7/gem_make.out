@@ -1,0 +1,16 @@
+current directory: /home/aoran/Documents/Projects/Benchmark_SI/For_website_repo/back_up_repo/vendor/bundle/ruby/3.0.0/gems/eventmachine-1.2.7/ext/fastfilereader
+/usr/bin/ruby3.0 -I /usr/lib/ruby/vendor_ruby -r ./siteconf20230407-67541-bxt8z9.rb extconf.rb
+creating Makefile
+
+current directory: /home/aoran/Documents/Projects/Benchmark_SI/For_website_repo/back_up_repo/vendor/bundle/ruby/3.0.0/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= clean
+
+current directory: /home/aoran/Documents/Projects/Benchmark_SI/For_website_repo/back_up_repo/vendor/bundle/ruby/3.0.0/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\=
+compiling mapper.cpp
+compiling rubymain.cpp
+linking shared-object fastfilereaderext.so
+
+current directory: /home/aoran/Documents/Projects/Benchmark_SI/For_website_repo/back_up_repo/vendor/bundle/ruby/3.0.0/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 fastfilereaderext.so ./.gem.20230407-67541-zt0zz7

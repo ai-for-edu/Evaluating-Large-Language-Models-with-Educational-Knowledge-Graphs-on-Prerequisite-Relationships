@@ -1,0 +1,10 @@
+current directory: /home/aoran/Documents/Projects/Benchmark_SI/For_website_repo/back_up_repo/vendor/bundle/ruby/3.0.0/gems/sass-embedded-1.61.0/ext/sass
+/usr/bin/ruby3.0 -I/usr/lib/ruby/vendor_ruby -rrubygems /home/aoran/Documents/Projects/Benchmark_SI/For_website_repo/back_up_repo/vendor/bundle/ruby/3.0.0/gems/rake-13.0.6/exe/rake RUBYARCHDIR\=/home/aoran/Documents/Projects/Benchmark_SI/For_website_repo/back_up_repo/vendor/bundle/ruby/3.0.0/extensions/x86_64-linux/3.0.0/sass-embedded-1.61.0 RUBYLIBDIR\=/home/aoran/Documents/Projects/Benchmark_SI/For_website_repo/back_up_repo/vendor/bundle/ruby/3.0.0/extensions/x86_64-linux/3.0.0/sass-embedded-1.61.0
+fetch https://github.com/sass/dart-sass-embedded/releases/download/1.61.0/sass_embedded-1.61.0-linux-x64.tar.gz
+tar -vxC . -f sass_embedded-1.61.0-linux-x64.tar.gz --no-same-owner --no-same-permissions
+mkdir -p .
+sass_embedded/src/LICENSE
+sass_embedded/src/dart
+sass_embedded/src/dart-sass-embedded.snapshot
+sass_embedded/dart-sass-embedded
+rm sass_embedded-1.61.0-linux-x64.tar.gz
