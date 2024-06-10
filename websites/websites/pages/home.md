@@ -21,13 +21,14 @@ The dataset is a collection of four educational knowledge graphs with a focus on
 See the following pages for details:
 
 - [Download Dataset]({{ '/download/' | relative_url }})
+- [How to Run the Code]({{ '/howto/' | relative_url }})
 - [Benchmark]({{ '/benchmark/' | relative_url }})
   &nbsp;
 
 ## Announcement
 
-*Jun. xx, 2024* Website and GitHub updated for submission.
+*Jun. 10, 2024* Website and GitHub updated for submission.
 
-*Jun. 06, 2024* Website is online.
+*Jun. 10, 2024* Website is online.
 
-*Jun. 06, 2024* Code is available at Github.
+*Jun. 07, 2024* Code is available at Github.
