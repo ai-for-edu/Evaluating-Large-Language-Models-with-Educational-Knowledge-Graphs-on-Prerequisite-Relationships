@@ -1,0 +1,30 @@
+I" <h4 id="welcome-to-the-page-of-evaluating-large-language-models-with-educational-knowledge-graphs-challenges-with-prerequisite-relationships-and-multi-hop-reasoning">Welcome to the page of Evaluating Large Language Models with Educational Knowledge Graphs: Challenges with Prerequisite Relationships and Multi-Hop Reasoning.</h4>
+
+<h2 id="about">About</h2>
+
+<p>The dataset is a collection of four educational knowledge graphs with a focus on prerequisite relationships.</p>
+
+<ul>
+  <li>All in ‘graphml’ for easy-loading.</li>
+  <li>All nodes have IDs and names.</li>
+  <li>Cover cases in English and Chinese.</li>
+</ul>
+
+<h2 id="important-links">Important Links</h2>
+
+<p>See the following pages for details:</p>
+
+<ul>
+  <li><a href="/download/">Download Dataset</a></li>
+  <li><a href="/benchmark/">Benchmark</a>
+ </li>
+</ul>
+
+<h2 id="announcement">Announcement</h2>
+
+<p><em>Jun. xx, 2024</em> Website and GitHub updated for submission.</p>
+
+<p><em>Jun. 06, 2024</em> Website is online.</p>
+
+<p><em>Jun. 06, 2024</em> Code is available at Github.</p>
+:ET

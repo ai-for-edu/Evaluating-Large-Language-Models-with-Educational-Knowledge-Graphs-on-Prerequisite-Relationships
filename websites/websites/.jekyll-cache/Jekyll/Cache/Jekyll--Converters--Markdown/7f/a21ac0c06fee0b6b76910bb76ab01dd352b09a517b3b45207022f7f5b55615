@@ -1,0 +1,28 @@
+I"
+<p>Here are the links to download data.</p>
+
+<p>The data can also be found in /data folder in the project GitHub Repo.</p>
+
+<table class="table table-dark table-striped"> 
+    <tr>
+        <th>Name</th>
+        <th>Download Link</th>
+    </tr>
+    <tr>
+        <td>DBE-KT22</td>
+        <td><a href="https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships/blob/main/data/DBE-KT22/DBE-KT22.graphml">Link</a></td>
+    </tr>
+    <tr>
+        <td>WDKG-Course</td>
+        <td><a href="https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships/blob/main/data/WDKG/WDKG-Course.graphml">Link</a></td>
+    </tr>
+    <tr>
+        <td>WDKG-KnowledgePoints</td>
+        <td><a href="https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships/blob/main/data/WDKG/WDKG-KnowledgePoints.graphml">Link</a></td>
+    </tr>
+    <tr>
+        <td>Junyi-Prerequisites</td>
+        <td><a href="https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships/blob/main/data/Junyi/Junyi-Prerequisites.graphml">Link</a></td>
+    </tr>
+</table>
+:ET

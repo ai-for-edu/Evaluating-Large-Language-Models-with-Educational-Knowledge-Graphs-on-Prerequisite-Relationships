@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+    <title>How to run the code - LLM + KC</title>
+  
+
+   
+  
+  
+  
+
+  
+  
+    <meta name="description" content="How to run the code in the GitHub Repo.">
+  
+  
+  
+  
+
+  <meta property="og:url" content="http://localhost:4000/howto/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="How to run the code">
+  
+    <meta property="og:description" content="How to run the code in the GitHub Repo.">
+  
+  
+  
+    <meta property="og:image" content="http://localhost:4000/assets/theme/images/Background_4_LLMS.png">
+  
+
+  <link rel="icon" type="image/x-icon" href="http://localhost:4000/favicon.ico">
+  <!-- Bootstrap CSS is included in main.css -->
+  <link rel="stylesheet" href="/assets/theme/css/main.css">
+  <link rel="stylesheet" href="/assets/theme/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="/assets/theme/css/academicons.min.css">
+  <link rel="stylesheet" href="/assets/theme/css/pygments.css">
+  
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+  
+  <link rel="alternate" type="application/rss+xml" title="LLM + KC - RSS feed" href="http://localhost:4000/feed.xml" >
+  <!-- Javascript libraries: loaded at top so templates can use these -->
+  <script src="/assets/theme/js/jquery.min.js"></script>
+  <script src="/assets/theme/js/popper.min.js"></script>
+  <script src="/assets/theme/js/bootstrap.min.js"></script>
+</head>
+
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-nav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      
+        <img class="me-3" src="/assets/theme/images/pure_LOGO.png" alt="LLM + KC">
+      
+      LLM + KC
+    </a>
+    
+    
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+        Menu <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <ul class="navbar-nav ms-auto">
+          
+            
+              <li class="navbar-item">
+                
+                <a class="nav-link" href="/">Home</a>
+              </li>
+            
+          
+            
+              <li class="navbar-item">
+                
+                <a class="nav-link" href="/about/">About</a>
+              </li>
+            
+          
+            
+              <li class="navbar-item">
+                
+                <a class="nav-link" href="/team/">Team</a>
+              </li>
+            
+          
+            
+              <li class="navbar-item">
+                
+                <a class="nav-link" href="/download/">Download</a>
+              </li>
+            
+          
+            
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                  Benchmark
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  
+                    
+                      
+                      <a class="dropdown-item" href="/methods/">Methods</a>
+                    
+                  
+                    
+                      
+                      <a class="dropdown-item active" href="/howto/">HowTo</a>
+                    
+                  
+                    
+                      
+                      <a class="dropdown-item" href="/benchmark/">Results</a>
+                    
+                  
+                </div>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+  </div>
+</nav>
+
+
+    <main>
+      
+
+  <header class="header bg-image" style="background-image: url('/assets/theme/images/Background_4_LLMS.png')">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-lg-8 position-relative mx-auto">
+          <h1>How to run the code</h1>
+          
+          <div class="lead"><p>How to run the code in the GitHub Repo.</p>
+</div>
+          
+          
+
+          <div class="tags">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </header>
+
+
+      <div class="container content">
+          
+        <div class="row">
+  
+  <div class="col-md-10 col-lg-8 order-lg-first mx-auto">
+
+    <p>Here are relevant instructions to reproduce the results in this project.</p>
+
+<h4 id="1-clone-the-repo">1. Clone the Repo</h4>
+
+<p>First, please clone the GitHub Repo at: https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> git clone https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships
+</code></pre></div></div>
+
+<p>Please note that although the data is provided in a separate folder /data/, there is a folder /benchmark/data/ holding exactly the same data and in similar setup.
+So there is no need to copy the data from /data/ to /benchmark/data/ .</p>
+
+<p>Redirect to /benchmark/ folder:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> <span class="nb">cd </span>benchmark/
+</code></pre></div></div>
+
+<h4 id="2-generate-question-queries">2. Generate question queries</h4>
+
+<p>To generate questions on all of the tasks and on all of the datasets:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> python generate_question_query.py
+</code></pre></div></div>
+<p>Feel free to play around the code to customize the query generation.</p>
+
+<h4 id="3-get-answers-from-llms">3. Get answers from LLMs</h4>
+
+<p>To get the answers on all of the queries generated in the last step:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> python obtain_llm_answers.py
+</code></pre></div></div>
+<p>Current setup will call a function in /Edu_KG_Eval/llm_engine.py, which requires an API key to run models on a remote. Feel free to replace following connection details in function generate_answer of class ApiFoxAnswer:</p>
+
+<ul>
+  <li>HTTPS path in ‘conn = http.client.HTTPSConnection()’</li>
+  <li>‘User-Agent’ in dictionary ‘headers’</li>
+</ul>
+
+<h4 id="4-evaluate-llm-answers">4. Evaluate LLM answers</h4>
+
+<p>As this step may require manual check, we provide some methods may be helpful to calculate accuracy, precision, recall, AUROC and AUPRC in the following script: ‘auto_eval_test.py’.</p>
+
+
+    
+  </div>
+</div>
+
+
+      </div>
+    </main>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      
+        <div class="col-lg">
+          <ul class="list-inline">
+            
+
+            
+
+            
+
+            
+
+            
+              <li class="list-inline-item">
+                <a href="https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+               
+          </ul>
+        </div>
+      
+
+      
+        <div class="col-lg">
+          
+
+
+          
+            <ul class="fa-ul">
+              
+                <li>
+                  <i class="fa-li fa fa-chevron-circle-right"></i>
+                  <a href="">Authors of Evaluating Large Language Models with Educational Knowledge Graphs - Challenges with Prerequisite Relationships and Multi-Hop Reasoning</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+
+    <div class="small mt-2">
+      
+      
+        <p>Content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0 License</a>. | Theme: <a href="https://github.com/peterdesmet/petridish">Petridish</a></p>
+
+      
+      
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/theme/js/anchor.min.js"></script>
+<script>
+  // Show anchors when hovering over headings, using anchor.js
+  (function () {
+    const headings = ".content h2[id], .content h3[id], .content h4[id], .content h5[id], .content h6[id]";
+    anchors.options = { placement: "right" };
+    anchors.add(headings);
+  })();
+</script>
+
+
+  </body>
+</html>

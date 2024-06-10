@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+    <title>Benchmarking LLMs on KGs with KCs and prerequisite relationships. - LLM + KC</title>
+  
+
+   
+  
+  
+  
+
+  
+  
+    <meta name="description" content="Here comes the benchmarking results.">
+  
+  
+  
+  
+
+  <meta property="og:url" content="http://localhost:4000/benchmark/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Benchmarking LLMs on KGs with KCs and prerequisite relationships.">
+  
+    <meta property="og:description" content="Here comes the benchmarking results.">
+  
+  
+  
+    <meta property="og:image" content="http://localhost:4000/assets/theme/images/Background_4_LLMS.png">
+  
+
+  <link rel="icon" type="image/x-icon" href="http://localhost:4000/favicon.ico">
+  <!-- Bootstrap CSS is included in main.css -->
+  <link rel="stylesheet" href="/assets/theme/css/main.css">
+  <link rel="stylesheet" href="/assets/theme/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="/assets/theme/css/academicons.min.css">
+  <link rel="stylesheet" href="/assets/theme/css/pygments.css">
+  
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+  
+  <link rel="alternate" type="application/rss+xml" title="LLM + KC - RSS feed" href="http://localhost:4000/feed.xml" >
+  <!-- Javascript libraries: loaded at top so templates can use these -->
+  <script src="/assets/theme/js/jquery.min.js"></script>
+  <script src="/assets/theme/js/popper.min.js"></script>
+  <script src="/assets/theme/js/bootstrap.min.js"></script>
+</head>
+
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-nav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      
+        <img class="me-3" src="/assets/theme/images/pure_LOGO.png" alt="LLM + KC">
+      
+      LLM + KC
+    </a>
+    
+    
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+        Menu <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <ul class="navbar-nav ms-auto">
+          
+            
+              <li class="navbar-item">
+                
+                <a class="nav-link" href="/">Home</a>
+              </li>
+            
+          
+            
+              <li class="navbar-item">
+                
+                <a class="nav-link" href="/about/">About</a>
+              </li>
+            
+          
+            
+              <li class="navbar-item">
+                
+                <a class="nav-link" href="/team/">Team</a>
+              </li>
+            
+          
+            
+              <li class="navbar-item">
+                
+                <a class="nav-link" href="/download/">Download</a>
+              </li>
+            
+          
+            
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                  Benchmark
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  
+                    
+                      
+                      <a class="dropdown-item" href="/methods/">Methods</a>
+                    
+                  
+                    
+                      
+                      <a class="dropdown-item" href="/howto/">HowTo</a>
+                    
+                  
+                    
+                      
+                      <a class="dropdown-item active" href="/benchmark/">Results</a>
+                    
+                  
+                </div>
+              </li>
+            
+          
+        </ul>
+      </div>
+    
+  </div>
+</nav>
+
+
+    <main>
+      
+
+  <header class="header bg-image" style="background-image: url('/assets/theme/images/Background_4_LLMS.png')">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-lg-8 position-relative mx-auto">
+          <h1>Benchmarking LLMs on KGs with KCs and prerequisite relationships.</h1>
+          
+          <div class="lead"><p>Here comes the benchmarking results.</p>
+</div>
+          
+          
+
+          <div class="tags">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </header>
+
+
+      <div class="container content">
+          
+        <div class="row">
+  
+  <div class="col-md-10 col-lg-3 mx-auto">
+    <div class="toc">
+      <h6>On this page</h6>
+      <ul><li><a href="#benchmarking-on-one-hop-relationship-verification">Benchmarking on One-hop Relationship Verification</a></li><li><a href="#benchmarking-on-conjunction-two-relationship-verification">Benchmarking on Conjunction-two Relationship Verification</a></li><li><a href="#benchmarking-on-conjunction-three-relationship-verification">Benchmarking on Conjunction-three Relationship Verification</a></li><li><a href="#benchmarking-on-two-hop-reasoning">Benchmarking on Two-hop Reasoning</a></li><li><a href="#benchmarking-on-three-hop-reasoning">Benchmarking on Three-hop Reasoning</a></li><li><a href="#benchmarking-on-relationships-extraction-with-node-pairs">Benchmarking on Relationships Extraction with Node Pairs</a></li><li><a href="#benchmarking-on-relationships-extraction-with-subgraphs">Benchmarking on Relationships Extraction with Subgraphs</a></li></ul>
+    </div>
+  </div>
+  
+  <div class="col-md-10 col-lg-8 order-lg-first mx-auto">
+
+    <h2 id="benchmarking-on-one-hop-relationship-verification">Benchmarking on One-hop Relationship Verification</h2>
+
+<p>The results shown in the tables are the accuracy of investigated LLMs on the task of one-hop relationship verification.</p>
+
+<h4 id="1-accuracy-in--on-all-positive-samples">1) Accuracy (in %) on all positive samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-KnowledgePoints</th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>28.6</td>
+        <td style="border-right: 2px solid white;">46.6</td>
+        <td>54.4</td>
+        <td style="border-right: 2px solid white;">56.6</td>
+        <td>20.2</td>
+        <td style="border-right: 2px solid white;">8.6</td>
+        <td>58.9</td>
+        <td>46.7</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>50.2</td>
+        <td style="border-right: 2px solid white;">64.6</td>
+        <td>49.9</td>
+        <td style="border-right: 2px solid white;">68.6</td>
+        <td>42.1</td>
+        <td style="border-right: 2px solid white;">62.7</td>
+        <td>72.2</td>
+        <td>76.8</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>46.5</td>
+        <td style="border-right: 2px solid white;">66.0</td>
+        <td>56.7</td>
+        <td style="border-right: 2px solid white;">92.4</td>
+        <td>38.1</td>
+        <td style="border-right: 2px solid white;">30.4</td>
+        <td>80.5</td>
+        <td>68.5</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>56.3</td>
+        <td style="border-right: 2px solid white;">81.9</td>
+        <td>82.9</td>
+        <td style="border-right: 2px solid white;">86.5</td>
+        <td>65.9</td>
+        <td style="border-right: 2px solid white;">52.9</td>
+        <td>80.9</td>
+        <td>76.8</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>26.4</td>
+        <td style="border-right: 2px solid white;">26.3</td>
+        <td>54.6</td>
+        <td style="border-right: 2px solid white;">76.7</td>
+        <td>56.2</td>
+        <td style="border-right: 2px solid white;">34.7</td>
+        <td>62.5</td>
+        <td>50.1</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>23.9</td>
+        <td style="border-right: 2px solid white;">60.4</td>
+        <td>22.1</td>
+        <td style="border-right: 2px solid white;">64.5</td>
+        <td>23.9</td>
+        <td style="border-right: 2px solid white;">8.4</td>
+        <td>24.8</td>
+        <td>64.2</td>
+    </tr>
+</table></div>
+
+<h4 id="2-accuracy-in--on-all-negative-samples">2) Accuracy (in %) on all negative samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-KnowledgePoints</th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>96.8</td>
+        <td style="border-right: 2px solid white;">86.8</td>
+        <td>80.6</td>
+        <td style="border-right: 2px solid white;">58.8</td>
+        <td>82.3</td>
+        <td style="border-right: 2px solid white;">86.7</td>
+        <td>88.8</td>
+        <td>90.9</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>84.4</td>
+        <td style="border-right: 2px solid white;">86.8</td>
+        <td>86.1</td>
+        <td style="border-right: 2px solid white;">56.7</td>
+        <td>74.3</td>
+        <td style="border-right: 2px solid white;">72.9</td>
+        <td>94.4</td>
+        <td>97.0</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>88.7</td>
+        <td style="border-right: 2px solid white;">80.2</td>
+        <td>64.9</td>
+        <td style="border-right: 2px solid white;">24.6</td>
+        <td>76.3</td>
+        <td style="border-right: 2px solid white;">80.6</td>
+        <td>70.7</td>
+        <td>88.7</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>84.5</td>
+        <td style="border-right: 2px solid white;">54.1</td>
+        <td>45.0</td>
+        <td style="border-right: 2px solid white;">50.7</td>
+        <td>52.1</td>
+        <td style="border-right: 2px solid white;">66.9</td>
+        <td>54.7</td>
+        <td>72.3</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>94.6</td>
+        <td style="border-right: 2px solid white;">96.5</td>
+        <td>86.9</td>
+        <td style="border-right: 2px solid white;">38.7</td>
+        <td>74.1</td>
+        <td style="border-right: 2px solid white;">80.9</td>
+        <td>78.7</td>
+        <td>88.3</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>98.1</td>
+        <td style="border-right: 2px solid white;">88.6</td>
+        <td>88.3</td>
+        <td style="border-right: 2px solid white;">76.7</td>
+        <td>66.1</td>
+        <td style="border-right: 2px solid white;">88.6</td>
+        <td>93.0</td>
+        <td>76.4</td>
+    </tr>
+</table></div>
+
+<h4 id="3-accuracy-in--on-all-samples">3) Accuracy (in %) on all samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-KnowledgePoints</th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>62.7</td>
+        <td style="border-right: 2px solid white;">66.7</td>
+        <td>67.5</td>
+        <td style="border-right: 2px solid white;">57.7</td>
+        <td>47.3</td>
+        <td style="border-right: 2px solid white;">67.7</td>
+        <td>73.9</td>
+        <td>68.8</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>75.3</td>
+        <td style="border-right: 2px solid white;">83.7</td>
+        <td>68.0</td>
+        <td style="border-right: 2px solid white;">62.7</td>
+        <td>58.2</td>
+        <td style="border-right: 2px solid white;">67.8</td>
+        <td>79.3</td>
+        <td>68.9</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>67.6</td>
+        <td style="border-right: 2px solid white;">73.1</td>
+        <td>60.8</td>
+        <td style="border-right: 2px solid white;">58.5</td>
+        <td>57.2</td>
+        <td style="border-right: 2px solid white;">55.5</td>
+        <td>75.6</td>
+        <td>78.6</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>70.4</td>
+        <td style="border-right: 2px solid white;">68.0</td>
+        <td>63.9</td>
+        <td style="border-right: 2px solid white;">68.6</td>
+        <td>59.0</td>
+        <td style="border-right: 2px solid white;">59.9</td>
+        <td>82.9</td>
+        <td>76.9</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>60.5</td>
+        <td style="border-right: 2px solid white;">61.4</td>
+        <td>70.7</td>
+        <td style="border-right: 2px solid white;">57.8</td>
+        <td>65.3</td>
+        <td style="border-right: 2px solid white;">57.8</td>
+        <td>70.6</td>
+        <td>69.2</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>61.0</td>
+        <td style="border-right: 2px solid white;">74.5</td>
+        <td>55.2</td>
+        <td style="border-right: 2px solid white;">70.6</td>
+        <td>45.0</td>
+        <td style="border-right: 2px solid white;">48.5</td>
+        <td>58.9</td>
+        <td>70.3</td>
+    </tr>
+</table></div>
+
+<h2 id="benchmarking-on-conjunction-two-relationship-verification">Benchmarking on Conjunction-two Relationship Verification</h2>
+
+<p>The results shown in the tables are the accuracy of investigated LLMs on the task of conjunction-two relationship verification.</p>
+
+<h4 id="1-accuracy-in--on-all-positive-samples-1">1) Accuracy (in %) on all positive samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>55.5 </td>
+        <td style="border-right: 2px solid white;">11.1 </td>
+        <td>92.3 </td>
+        <td>69.2 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>67.6 </td>
+        <td style="border-right: 2px solid white;">44.0 </td>
+        <td>62.0 </td>
+        <td>92.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>67.0 </td>
+        <td style="border-right: 2px solid white;">67.0 </td>
+        <td>85.0 </td>
+        <td>92.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>78.0 </td>
+        <td style="border-right: 2px solid white;">78.0 </td>
+        <td>92.0 </td>
+        <td>85.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>44.0 </td>
+        <td style="border-right: 2px solid white;">56.0 </td>
+        <td>85.0 </td>
+        <td>77.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>33.0 </td>
+        <td style="border-right: 2px solid white;">67.0 </td>
+        <td>77.0 </td>
+        <td>69.0 </td>
+    </tr>
+</table></div>
+
+<h4 id="2-accuracy-in--on-negative-p1-samples">2) Accuracy (in %) on negative p1 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>89.00 </td>
+        <td style="border-right: 2px solid white;">78.00 </td>
+        <td>54.00 </td>
+        <td>54.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>67.00 </td>
+        <td style="border-right: 2px solid white;">89.00 </td>
+        <td>69.00 </td>
+        <td>62.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>33.00 </td>
+        <td style="border-right: 2px solid white;">67.00 </td>
+        <td>23.00 </td>
+        <td>0.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>56.00 </td>
+        <td style="border-right: 2px solid white;">44.00 </td>
+        <td>15.00 </td>
+        <td>46.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>78.00 </td>
+        <td style="border-right: 2px solid white;">78.00 </td>
+        <td>31.00 </td>
+        <td>54.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>89.00 </td>
+        <td style="border-right: 2px solid white;">89.00 </td>
+        <td>77.00 </td>
+        <td>77.00 </td>
+    </tr>
+</table></div>
+
+<h4 id="3-accuracy-in--on-negative-p2-samples">3) Accuracy (in %) on negative p2 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>56.00 </td>
+        <td style="border-right: 2px solid white;">67.00 </td>
+        <td>69.00 </td>
+        <td>54.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>44.00 </td>
+        <td style="border-right: 2px solid white;">56.00 </td>
+        <td>46.00 </td>
+        <td>23.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>44.00 </td>
+        <td style="border-right: 2px solid white;">44.00 </td>
+        <td>8.00 </td>
+        <td>8.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>44.00 </td>
+        <td style="border-right: 2px solid white;">22.00 </td>
+        <td>54.00 </td>
+        <td>69.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>56.00 </td>
+        <td style="border-right: 2px solid white;">56.00 </td>
+        <td>38.00 </td>
+        <td>69.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>89.00 </td>
+        <td style="border-right: 2px solid white;">89.00 </td>
+        <td>92.00 </td>
+        <td>69.00 </td>
+    </tr>
+</table></div>
+
+<h4 id="4-accuracy-in--on-negative-p12-samples">4) Accuracy (in %) on negative p12 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>100.00 </td>
+        <td style="border-right: 2px solid white;">89.00 </td>
+        <td>54.00 </td>
+        <td>92.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>56.00 </td>
+        <td style="border-right: 2px solid white;">78.00 </td>
+        <td>85.00 </td>
+        <td>54.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>33.00 </td>
+        <td style="border-right: 2px solid white;">78.00 </td>
+        <td>46.00 </td>
+        <td>15.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>67.00 </td>
+        <td style="border-right: 2px solid white;">78.00 </td>
+        <td>77.00 </td>
+        <td>92.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>67.00 </td>
+        <td style="border-right: 2px solid white;">89.00 </td>
+        <td>46.00 </td>
+        <td>62.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>89.00 </td>
+        <td style="border-right: 2px solid white;">89.00 </td>
+        <td>77.00 </td>
+        <td>69.00 </td>
+    </tr>
+</table></div>
+
+<h4 id="5-accuracy-in--on-all-samples">5) Accuracy (in %) on all samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>68.58 </td>
+        <td style="border-right: 2px solid white;">44.55 </td>
+        <td>75.65 </td>
+        <td>67.93 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>61.63 </td>
+        <td style="border-right: 2px solid white;">59.17 </td>
+        <td>64.33 </td>
+        <td>69.17 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>51.83 </td>
+        <td style="border-right: 2px solid white;">65.00 </td>
+        <td>55.33 </td>
+        <td>49.83 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>66.83 </td>
+        <td style="border-right: 2px solid white;">63.00 </td>
+        <td>70.33 </td>
+        <td>77.00 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>55.50 </td>
+        <td style="border-right: 2px solid white;">65.17 </td>
+        <td>61.67 </td>
+        <td>69.33 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>61.00 </td>
+        <td style="border-right: 2px solid white;">78.00 </td>
+        <td>79.50 </td>
+        <td>70.33 </td>
+    </tr>
+</table></div>
+
+<h2 id="benchmarking-on-conjunction-three-relationship-verification">Benchmarking on Conjunction-three Relationship Verification</h2>
+
+<p>The results shown in the tables are the accuracy of investigated LLMs on the task of conjunction-three relationship verification.</p>
+
+<h4 id="1-accuracy-in--on-all-positive-samples-2">1) Accuracy (in %) on all positive samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>67.0 </td>
+        <td>67.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>56.0 </td>
+        <td>100.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>100.0 </td>
+        <td>100.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">100.0 </td>
+        <td>89.0 </td>
+        <td>89.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>100.0 </td>
+        <td>89.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>20.0 </td>
+        <td style="border-right: 2px solid white;">40.0 </td>
+        <td>56.0 </td>
+        <td>89.0</td>
+    </tr>
+</table></div>
+
+<h4 id="2-accuracy-in--on-negative-p1-samples-1">2) Accuracy (in %) on negative p1 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>67.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>67.0 </td>
+        <td>67.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">40.0 </td>
+        <td>56.0 </td>
+        <td>22.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>67.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>67.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>56.0 </td>
+        <td>56.0</td>
+    </tr>
+</table></div>
+
+<h4 id="3-accuracy-in--on-negative-p2-samples-1">3) Accuracy (in %) on negative p2 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>67.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>89.0 </td>
+        <td>44.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>56.0 </td>
+        <td>0.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">20.0 </td>
+        <td>33.0 </td>
+        <td>22.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">100.0 </td>
+        <td>56.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">100.0 </td>
+        <td>100.0 </td>
+        <td>56.0</td>
+    </tr>
+</table></div>
+
+<h4 id="4-accuracy-in--on-negative-p3-samples">4) Accuracy (in %) on negative p3 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">40.0 </td>
+        <td>78.0 </td>
+        <td>33.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>78.0 </td>
+        <td>44.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>22.0 </td>
+        <td>11.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>56.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>67.0 </td>
+        <td>67.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>44.0 </td>
+        <td>56.0</td>
+    </tr>
+</table></div>
+
+<h4 id="5-accuracy-in--on-negative-p12-samples">5) Accuracy (in %) on negative p12 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>89.0 </td>
+        <td>89.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>89.0 </td>
+        <td>67.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>67.0 </td>
+        <td>44.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">40.0 </td>
+        <td>78.0 </td>
+        <td>44.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>78.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>67.0 </td>
+        <td>56.0</td>
+    </tr>
+</table></div>
+
+<h4 id="6-accuracy-in--on-negative-p13-samples">6) Accuracy (in %) on negative p13 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>40.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>78.0 </td>
+        <td>89.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>40.0 </td>
+        <td style="border-right: 2px solid white;">40.0 </td>
+        <td>78.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">20.0 </td>
+        <td>67.0 </td>
+        <td>22.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>40.0 </td>
+        <td style="border-right: 2px solid white;">0.0 </td>
+        <td>33.0 </td>
+        <td>11.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>56.0 </td>
+        <td>67.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>67.0 </td>
+        <td>56.0</td>
+    </tr>
+</table></div>
+
+<h4 id="7-accuracy-in--on-negative-p23-samples">7) Accuracy (in %) on negative p23 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>56.0 </td>
+        <td>67.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>40.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>67.0 </td>
+        <td>22.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>67.0 </td>
+        <td>11.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">40.0 </td>
+        <td>56.0 </td>
+        <td>22.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">100.0 </td>
+        <td>44.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>56.0 </td>
+        <td>56.0</td>
+    </tr>
+</table></div>
+
+<h4 id="8-accuracy-in--on-negative-p123-samples">8) Accuracy (in %) on negative p123 samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">100.0 </td>
+        <td>89.0 </td>
+        <td>89.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">100.0 </td>
+        <td>100.0 </td>
+        <td>100.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">40.0 </td>
+        <td>89.0 </td>
+        <td>67.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>80.0 </td>
+        <td style="border-right: 2px solid white;">40.0 </td>
+        <td>78.0 </td>
+        <td>67.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">100.0 </td>
+        <td>89.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>78.0 </td>
+        <td>67.0</td>
+    </tr>
+</table></div>
+
+<h4 id="9-accuracy-in--on-all-samples">9) Accuracy (in %) on all samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>64.3 </td>
+        <td style="border-right: 2px solid white;">74.3 </td>
+        <td>70.9 </td>
+        <td>67.7 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>72.9 </td>
+        <td style="border-right: 2px solid white;">64.3 </td>
+        <td>68.6 </td>
+        <td>78.6 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>67.1 </td>
+        <td style="border-right: 2px solid white;">70.0 </td>
+        <td>80.3 </td>
+        <td>62.6 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>74.3 </td>
+        <td style="border-right: 2px solid white;">71.4 </td>
+        <td>73.1 </td>
+        <td>64.4 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>74.3 </td>
+        <td style="border-right: 2px solid white;">84.3 </td>
+        <td>82.6 </td>
+        <td>74.1 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">57.1 </td>
+        <td>61.4 </td>
+        <td>73.3</td>
+    </tr>
+</table></div>
+
+<h2 id="benchmarking-on-two-hop-reasoning">Benchmarking on Two-hop Reasoning</h2>
+
+<p>The results shown in the tables are the accuracy of investigated LLMs on the task of two-hop reasoning.</p>
+
+<h4 id="1-accuracy-in--on-all-positive-samples-3">1) Accuracy (in %) on all positive samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>93.8 </td>
+        <td style="border-right: 2px solid white;">71.9 </td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">71.9 </td>
+        <td>100.0 </td>
+        <td>65.6 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">qwen-turbo</td>
+        <td>90.6 </td>
+        <td style="border-right: 2px solid white;">56.3 </td>
+        <td>90.6 </td>
+        <td style="border-right: 2px solid white;">71.9 </td>
+        <td>93.8 </td>
+        <td>71.9 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">59.4 </td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">68.8 </td>
+        <td>93.8 </td>
+        <td>59.4 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>93.8 </td>
+        <td style="border-right: 2px solid white;">93.8 </td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">78.1 </td>
+        <td>93.8 </td>
+        <td>90.6 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>65.6 </td>
+        <td style="border-right: 2px solid white;">59.4 </td>
+        <td>68.8 </td>
+        <td style="border-right: 2px solid white;">56.3 </td>
+        <td>71.9 </td>
+        <td>56.3 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>65.6 </td>
+        <td style="border-right: 2px solid white;">56.3 </td>
+        <td>90.6 </td>
+        <td style="border-right: 2px solid white;">68.8 </td>
+        <td>71.9 </td>
+        <td>59.4</td>
+    </tr>
+</table></div>
+
+<h4 id="2-accuracy-in--on-invert-relationships-samples">2) Accuracy (in %) on invert relationships samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>25.0 </td>
+        <td style="border-right: 2px solid white;">37.5 </td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">100.0 </td>
+        <td>25.0 </td>
+        <td>0.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">qwen-turbo</td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>75.0 </td>
+        <td style="border-right: 2px solid white;">62.5 </td>
+        <td>0.0 </td>
+        <td>37.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>25.0 </td>
+        <td>75.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>37.5 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">37.5 </td>
+        <td>12.5 </td>
+        <td>12.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">62.5 </td>
+        <td>37.5 </td>
+        <td>25.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>37.5 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>25.0 </td>
+        <td>37.5</td>
+    </tr>
+</table></div>
+
+<h4 id="3-accuracy-in--on-replace-terminal-samples">3) Accuracy (in %) on replace terminal samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">37.5 </td>
+        <td>0.0 </td>
+        <td>75.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">qwen-turbo</td>
+        <td>25.0 </td>
+        <td style="border-right: 2px solid white;">75.0 </td>
+        <td>37.5 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>12.5 </td>
+        <td>75.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">75.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>0.0 </td>
+        <td>50.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>37.5 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">37.5 </td>
+        <td>0.0 </td>
+        <td>37.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>62.5 </td>
+        <td style="border-right: 2px solid white;">62.5 </td>
+        <td>25.0 </td>
+        <td style="border-right: 2px solid white;">75.0 </td>
+        <td>0.0 </td>
+        <td>50.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>37.5 </td>
+        <td style="border-right: 2px solid white;">62.5 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">37.5 </td>
+        <td>12.5 </td>
+        <td>50.0</td>
+    </tr>
+</table></div>
+
+<h4 id="4-accuracy-in--on-replace-intermediate-samples">4) Accuracy (in %) on replace intermediate samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>0.0 </td>
+        <td>25.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">qwen-turbo</td>
+        <td>25.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>25.0 </td>
+        <td style="border-right: 2px solid white;">37.5 </td>
+        <td>12.5 </td>
+        <td>50.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">37.5 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>0.0 </td>
+        <td>25.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>0.0 </td>
+        <td>0.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">75.0 </td>
+        <td>37.5 </td>
+        <td>37.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>25.0 </td>
+        <td style="border-right: 2px solid white;">37.5 </td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>12.5 </td>
+        <td>25.0</td>
+    </tr>
+</table></div>
+
+<h4 id="5-accuracy-in--on-path-disruption-samples">5) Accuracy (in %) on path disruption samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>0.0 </td>
+        <td>37.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">qwen-turbo</td>
+        <td>37.5 </td>
+        <td style="border-right: 2px solid white;">62.5 </td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">12.5 </td>
+        <td>50.0 </td>
+        <td>62.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">37.5 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>12.5 </td>
+        <td>62.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>25.0 </td>
+        <td style="border-right: 2px solid white;">25.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">12.5 </td>
+        <td>25.0 </td>
+        <td>0.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>25.0 </td>
+        <td style="border-right: 2px solid white;">62.5 </td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">75.0 </td>
+        <td>37.5 </td>
+        <td>62.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>12.5 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>25.0 </td>
+        <td>0.0</td>
+    </tr>
+</table></div>
+
+<h4 id="6-accuracy-in--on-all-samples">6) Accuracy (in %) on all samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">56.3 </td>
+        <td>56.3 </td>
+        <td style="border-right: 2px solid white;">65.6 </td>
+        <td>53.1 </td>
+        <td>50.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">qwen-turbo</td>
+        <td>57.8 </td>
+        <td style="border-right: 2px solid white;">57.8 </td>
+        <td>64.1 </td>
+        <td style="border-right: 2px solid white;">56.3 </td>
+        <td>56.3 </td>
+        <td>64.1 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>54.7 </td>
+        <td style="border-right: 2px solid white;">51.6 </td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">53.1 </td>
+        <td>51.6 </td>
+        <td>56.3 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>60.9 </td>
+        <td style="border-right: 2px solid white;">62.5 </td>
+        <td>51.6 </td>
+        <td style="border-right: 2px solid white;">53.1 </td>
+        <td>51.6 </td>
+        <td>51.6 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>51.6 </td>
+        <td style="border-right: 2px solid white;">54.7 </td>
+        <td>45.3 </td>
+        <td style="border-right: 2px solid white;">64.1 </td>
+        <td>50.0 </td>
+        <td>50.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>46.9 </td>
+        <td style="border-right: 2px solid white;">53.1 </td>
+        <td>54.7 </td>
+        <td style="border-right: 2px solid white;">54.7 </td>
+        <td>45.3 </td>
+        <td>43.8</td>
+    </tr>
+</table></div>
+
+<h2 id="benchmarking-on-three-hop-reasoning">Benchmarking on Three-hop Reasoning</h2>
+
+<p>The results shown in the tables are the accuracy of investigated LLMs on the task of three-hop reasoning.</p>
+
+<h4 id="1-accuracy-in--on-all-positive-samples-4">1) Accuracy (in %) on all positive samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>96.0 </td>
+        <td style="border-right: 2px solid white;">56.0 </td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">92.0 </td>
+        <td>100.0 </td>
+        <td>52.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">qwen-turbo</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">64.0 </td>
+        <td>96.0 </td>
+        <td style="border-right: 2px solid white;">64.0 </td>
+        <td>96.0 </td>
+        <td>32.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">72.0 </td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>92.0 </td>
+        <td>48.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>88.0 </td>
+        <td style="border-right: 2px solid white;">84.0 </td>
+        <td>100.0 </td>
+        <td style="border-right: 2px solid white;">84.0 </td>
+        <td>100.0 </td>
+        <td>88.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>84.0 </td>
+        <td style="border-right: 2px solid white;">84.0 </td>
+        <td>88.0 </td>
+        <td style="border-right: 2px solid white;">28.0 </td>
+        <td>96.0 </td>
+        <td>68.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>84.0 </td>
+        <td style="border-right: 2px solid white;">72.0 </td>
+        <td>88.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>88.0 </td>
+        <td>56.0</td>
+    </tr>
+</table></div>
+
+<h4 id="2-accuracy-in--on-all-negative-samples-1">2) Accuracy (in %) on all negative samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">16.0 </td>
+        <td>0.0 </td>
+        <td>44.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">qwen-turbo</td>
+        <td>8.0 </td>
+        <td style="border-right: 2px solid white;">56.0 </td>
+        <td>8.0 </td>
+        <td style="border-right: 2px solid white;">36.0 </td>
+        <td>12.0 </td>
+        <td>60.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">52.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">44.0 </td>
+        <td>4.0 </td>
+        <td>76.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">12.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">20.0 </td>
+        <td>16.0 </td>
+        <td>24.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>8.0 </td>
+        <td style="border-right: 2px solid white;">56.0 </td>
+        <td>4.0 </td>
+        <td style="border-right: 2px solid white;">76.0 </td>
+        <td>4.0 </td>
+        <td>52.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>32.0 </td>
+        <td style="border-right: 2px solid white;">80.0 </td>
+        <td>0.0 </td>
+        <td style="border-right: 2px solid white;">44.0 </td>
+        <td>28.0 </td>
+        <td>76.0</td>
+    </tr>
+</table></div>
+
+<h4 id="3-accuracy-in--on-all-samples-1">3) Accuracy (in %) on all samples.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <thead>
+        <th style="border-right: 2px solid white;" rowspan="2">LLM</th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22            </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </thead>
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;"></td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">R.</td>
+        <td style="border-bottom: 2px solid white;">Q.</td>
+        <td style="border-bottom: 2px solid white;">R.</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>48.0 </td>
+        <td style="border-right: 2px solid white;">58.0 </td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">54.0 </td>
+        <td>50.0 </td>
+        <td>48.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">qwen-turbo</td>
+        <td>54.0 </td>
+        <td style="border-right: 2px solid white;">60.0 </td>
+        <td>52.0 </td>
+        <td style="border-right: 2px solid white;">50.0 </td>
+        <td>54.0 </td>
+        <td>46.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">62.0 </td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">52.0 </td>
+        <td>48.0 </td>
+        <td>62.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>44.0 </td>
+        <td style="border-right: 2px solid white;">48.0 </td>
+        <td>50.0 </td>
+        <td style="border-right: 2px solid white;">52.0 </td>
+        <td>58.0 </td>
+        <td>56.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>46.0 </td>
+        <td style="border-right: 2px solid white;">70.0 </td>
+        <td>46.0 </td>
+        <td style="border-right: 2px solid white;">52.0 </td>
+        <td>50.0 </td>
+        <td>60.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>58.0 </td>
+        <td style="border-right: 2px solid white;">76.0 </td>
+        <td>44.0 </td>
+        <td style="border-right: 2px solid white;">52.0 </td>
+        <td>58.0 </td>
+        <td>66.0</td>
+    </tr>
+</table></div>
+
+<h2 id="benchmarking-on-relationships-extraction-with-node-pairs">Benchmarking on Relationships Extraction with Node Pairs</h2>
+
+<p>The results shown in the following tables are the accuracy, recall, precision, AUROC and AUPRC of investigated LLMs on the task of relationship extraction with node pairs.</p>
+
+<h4 id="1-accuracy-precision-and-recall-values-in--of-all-investigated-llms-on-relationship-extraction-tasks-with-binary-outputs-on-node-pairs-from-four-datasets">1) Accuracy, precision and recall values (in %) of all investigated LLMs on relationship extraction tasks with binary outputs on node pairs from four datasets.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;" rowspan="2">LLM</td>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="3">DBE-KT22             </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="3">WDKG-Course          </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="3">WDKG-KnoeledgePoints </th>
+        <th style="border-bottom: 2px solid white;" colspan="3">Junyi-Prerequisites</th>
+    </tr>
+<tr>
+        <td style="border-bottom: 2px solid white;">Acc</td>
+        <td style="border-bottom: 2px solid white;">Recall</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">Prec</td>
+        <td style="border-bottom: 2px solid white;">Acc</td>
+        <td style="border-bottom: 2px solid white;">Recall</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">Prec</td>
+        <td style="border-bottom: 2px solid white;">Acc</td>
+        <td style="border-bottom: 2px solid white;">Recall</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">Prec</td>
+        <td style="border-bottom: 2px solid white;">Acc</td>
+        <td style="border-bottom: 2px solid white;">Recall</td>
+        <td style="border-bottom: 2px solid white;">Prec</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>68.0</td>
+        <td>50.0</td>
+        <td style="border-right: 2px solid white;">87.5</td>
+        <td>52.0</td>
+        <td>28.6</td>
+        <td style="border-right: 2px solid white;">66.7</td>
+        <td>36.0</td>
+        <td>0.0</td>
+        <td style="border-right: 2px solid white;">0.0</td>
+        <td>68.0</td>
+        <td>60.0</td>
+        <td>81.8</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>64.0</td>
+        <td>50.0</td>
+        <td style="border-right: 2px solid white;">77.8</td>
+        <td>56.0</td>
+        <td>35.7</td>
+        <td style="border-right: 2px solid white;">71.4</td>
+        <td>60.0</td>
+        <td>33.3</td>
+        <td style="border-right: 2px solid white;">100.0</td>
+        <td>72.0</td>
+        <td>66.7</td>
+        <td>83.3</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>60.0</td>
+        <td>42.9</td>
+        <td style="border-right: 2px solid white;">75.0</td>
+        <td>56.6</td>
+        <td>28.6</td>
+        <td style="border-right: 2px solid white;">80.0</td>
+        <td>40.0</td>
+        <td>6.7</td>
+        <td style="border-right: 2px solid white;">50.0</td>
+        <td>72.0</td>
+        <td>53.3</td>
+        <td>100.0</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>84.0</td>
+        <td>78.6</td>
+        <td style="border-right: 2px solid white;">91.7</td>
+        <td>80.0</td>
+        <td>78.6</td>
+        <td style="border-right: 2px solid white;">84.6</td>
+        <td>56.0</td>
+        <td>46.7</td>
+        <td style="border-right: 2px solid white;">70.0</td>
+        <td>72.0</td>
+        <td>60.0</td>
+        <td>90.0</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>60.0</td>
+        <td>35.7</td>
+        <td style="border-right: 2px solid white;">83.3</td>
+        <td>64.0</td>
+        <td>50.0</td>
+        <td style="border-right: 2px solid white;">77.8</td>
+        <td>60.0</td>
+        <td>40.0</td>
+        <td style="border-right: 2px solid white;">85.7</td>
+        <td>56.0</td>
+        <td>33.3</td>
+        <td>83.3</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>52.0</td>
+        <td>28.6</td>
+        <td style="border-right: 2px solid white;">66.7</td>
+        <td>52.0</td>
+        <td>21.4</td>
+        <td style="border-right: 2px solid white;">75.0</td>
+        <td>36.0</td>
+        <td>6.7</td>
+        <td style="border-right: 2px solid white;">33.3</td>
+        <td>56.0</td>
+        <td>26.7</td>
+        <td>100.0</td>
+    </tr>
+</table></div>
+
+<h4 id="2-auroc-in--of-all-investigated-llms-on-relationship-extraction-tasks-with-binary-outputs-on-node-pairs-from-four-datasets">2) AUROC (in %) of all investigated LLMs on relationship extraction tasks with binary outputs on node pairs from four datasets.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;" rowspan="2">LLM</td>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22             </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course          </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-KnoeledgePoints </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </tr>
+<tr>
+        <td style="border-bottom: 2px solid white;">Binary</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">Float</td>
+        <td style="border-bottom: 2px solid white;">Binary</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">Float</td>
+        <td style="border-bottom: 2px solid white;">Binary</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">Float</td>
+        <td style="border-bottom: 2px solid white;">Binary</td>
+        <td style="border-bottom: 2px solid white;">Float</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>70.5 </td>
+        <td style="border-right: 2px solid white;">89.3 </td>
+        <td>55.2 </td>
+        <td style="border-right: 2px solid white;">77.3 </td>
+        <td>46.0 </td>
+        <td style="border-right: 2px solid white;">67.3 </td>
+        <td>70.0 </td>
+        <td>92.3 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>65.9 </td>
+        <td style="border-right: 2px solid white;">64.3 </td>
+        <td>58.8 </td>
+        <td style="border-right: 2px solid white;">71.0 </td>
+        <td>66.7 </td>
+        <td style="border-right: 2px solid white;">63.6 </td>
+        <td>73.3 </td>
+        <td>78.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>62.3 </td>
+        <td style="border-right: 2px solid white;">67.2 </td>
+        <td>59.7 </td>
+        <td style="border-right: 2px solid white;">36.7 </td>
+        <td>48.3 </td>
+        <td style="border-right: 2px solid white;">45.6 </td>
+        <td>76.7 </td>
+        <td>75.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>84.7 </td>
+        <td style="border-right: 2px solid white;">79.5 </td>
+        <td>80.2 </td>
+        <td style="border-right: 2px solid white;">66.7 </td>
+        <td>58.3 </td>
+        <td style="border-right: 2px solid white;">78.7 </td>
+        <td>75.0 </td>
+        <td>83.7 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>63.3 </td>
+        <td style="border-right: 2px solid white;">81.8 </td>
+        <td>65.9 </td>
+        <td style="border-right: 2px solid white;">93.3 </td>
+        <td>65.0 </td>
+        <td style="border-right: 2px solid white;">44.9 </td>
+        <td>61.7 </td>
+        <td>96.8 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>55.2 </td>
+        <td style="border-right: 2px solid white;">82.5 </td>
+        <td>56.2 </td>
+        <td style="border-right: 2px solid white;">73.0 </td>
+        <td>33.3 </td>
+        <td style="border-right: 2px solid white;">43.4 </td>
+        <td>63.3 </td>
+        <td>92.0</td>
+    </tr>
+</table></div>
+
+<h4 id="3-auprc-in--of-all-investigated-llms-on-relationship-extraction-tasks-with-binary-outputs-on-node-pairs-from-four-datasets">3) AUPRC (in %) of all investigated LLMs on relationship extraction tasks with binary outputs on node pairs from four datasets.</h4>
+
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;" rowspan="2">LLM</td>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">DBE-KT22             </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-Course          </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">WDKG-KnoeledgePoints </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Junyi-Prerequisites</th>
+    </tr>
+<tr>
+        <td style="border-bottom: 2px solid white;">Binary</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">Float</td>
+        <td style="border-bottom: 2px solid white;">Binary</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">Float</td>
+        <td style="border-bottom: 2px solid white;">Binary</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">Float</td>
+        <td style="border-bottom: 2px solid white;">Binary</td>
+        <td style="border-bottom: 2px solid white;">Float</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>71.8 </td>
+        <td style="border-right: 2px solid white;">86.0 </td>
+        <td>59.1 </td>
+        <td style="border-right: 2px solid white;">73.9 </td>
+        <td>60.0 </td>
+        <td style="border-right: 2px solid white;">81.2 </td>
+        <td>73.1 </td>
+        <td>90.8 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>66.9 </td>
+        <td style="border-right: 2px solid white;">64.7 </td>
+        <td>61.5 </td>
+        <td style="border-right: 2px solid white;">61.0 </td>
+        <td>73.3 </td>
+        <td style="border-right: 2px solid white;">77.4 </td>
+        <td>75.6 </td>
+        <td>78.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>64.1 </td>
+        <td style="border-right: 2px solid white;">61.6 </td>
+        <td>62.9 </td>
+        <td style="border-right: 2px solid white;">40.0 </td>
+        <td>59.3 </td>
+        <td style="border-right: 2px solid white;">72.1 </td>
+        <td>81.3 </td>
+        <td>78.9 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>84.0 </td>
+        <td style="border-right: 2px solid white;">65.9 </td>
+        <td>78.5 </td>
+        <td style="border-right: 2px solid white;">58.1 </td>
+        <td>64.7 </td>
+        <td style="border-right: 2px solid white;">87.5 </td>
+        <td>78.0 </td>
+        <td>79.6 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>65.8 </td>
+        <td style="border-right: 2px solid white;">74.4 </td>
+        <td>66.9 </td>
+        <td style="border-right: 2px solid white;">86.7 </td>
+        <td>70.3 </td>
+        <td style="border-right: 2px solid white;">64.8 </td>
+        <td>67.8 </td>
+        <td>94.1 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>59.1 </td>
+        <td style="border-right: 2px solid white;">76.9 </td>
+        <td>60.1 </td>
+        <td style="border-right: 2px solid white;">63.2 </td>
+        <td>58.2 </td>
+        <td style="border-right: 2px solid white;">64.1 </td>
+        <td>70.7 </td>
+        <td>93.4</td>
+    </tr>
+</table></div>
+
+<h2 id="benchmarking-on-relationships-extraction-with-subgraphs">Benchmarking on Relationships Extraction with Subgraphs</h2>
+
+<p>The results shown in the following tables are the AUROC and AUPRC of investigated LLMs on the task of relationship extraction with subgraphs on DBE-KT22 dataset.</p>
+
+<h4 id="1-average-auroc-in--of-investigated-llms-on-the-task-of-relationship-extraction-with-subgraphs-on-dbe-kt22-dataset">1) Average AUROC (in %) of investigated LLMs on the task of relationship extraction with subgraphs on DBE-KT22 dataset.</h4>
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;" rowspan="2">LLM</td>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">Subgraph 5          </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">Subgraph 10         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Subgraph 15</th>
+    </tr>
+    <tr>
+        <td style="border-bottom: 2px solid white;">B</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">F</td>
+        <td style="border-bottom: 2px solid white;">B</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">F</td>
+        <td style="border-bottom: 2px solid white;">B</td>
+        <td style="border-bottom: 2px solid white;">F</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>54.5 </td>
+        <td style="border-right: 2px solid white;">65.4 </td>
+        <td>69.9 </td>
+        <td style="border-right: 2px solid white;">70.1 </td>
+        <td>60.6 </td>
+        <td>66.2 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>67.0 </td>
+        <td style="border-right: 2px solid white;">77.3 </td>
+        <td>60.8 </td>
+        <td style="border-right: 2px solid white;">71.4 </td>
+        <td>56.8 </td>
+        <td>65.8 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>51.0 </td>
+        <td style="border-right: 2px solid white;">70.4 </td>
+        <td>61.0 </td>
+        <td style="border-right: 2px solid white;">65.4 </td>
+        <td>56.1 </td>
+        <td>60.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>60.5 </td>
+        <td style="border-right: 2px solid white;">70.5 </td>
+        <td>50.4 </td>
+        <td style="border-right: 2px solid white;">66.3 </td>
+        <td>47.9 </td>
+        <td>59.9 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>61.5 </td>
+        <td style="border-right: 2px solid white;">75.1 </td>
+        <td>54.7 </td>
+        <td style="border-right: 2px solid white;">61.0 </td>
+        <td>50.9 </td>
+        <td>59.0 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>63.0 </td>
+        <td style="border-right: 2px solid white;">80.2 </td>
+        <td>59.9 </td>
+        <td style="border-right: 2px solid white;">72.2 </td>
+        <td>54.5 </td>
+        <td>63.5</td>
+    </tr>
+</table></div>
+
+<h4 id="2-average-auprc-in--of-investigated-llms-on-the-task-of-relationship-extraction-with-subgraphs-on-dbe-kt22-dataset">2) Average AUPRC (in %) of investigated LLMs on the task of relationship extraction with subgraphs on DBE-KT22 dataset.</h4>
+<div class="table-responsive"><table class="table table-dark table-striped">
+    <tr>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;" rowspan="2">LLM</td>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">Subgraph 5          </th>
+        <th style="border-bottom: 2px solid white; border-right: 2px solid white;" colspan="2">Subgraph 10         </th>
+        <th style="border-bottom: 2px solid white;" colspan="2">Subgraph 15</th>
+    </tr>
+    <tr>
+        <td style="border-bottom: 2px solid white;">B</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">F</td>
+        <td style="border-bottom: 2px solid white;">B</td>
+        <td style="border-bottom: 2px solid white; border-right: 2px solid white;">F</td>
+        <td style="border-bottom: 2px solid white;">B</td>
+        <td style="border-bottom: 2px solid white;">F</td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">GPT-4</td>
+        <td>61.2 </td>
+        <td style="border-right: 2px solid white;">72.3 </td>
+        <td>63.7 </td>
+        <td style="border-right: 2px solid white;">69.2 </td>
+        <td>58.8 </td>
+        <td>63.4 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Qwen-turbo</td>
+        <td>69.7 </td>
+        <td style="border-right: 2px solid white;">77.0 </td>
+        <td>53.6 </td>
+        <td style="border-right: 2px solid white;">71.0 </td>
+        <td>53.4 </td>
+        <td>63.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Moonshot-v1-128k</td>
+        <td>54.3 </td>
+        <td style="border-right: 2px solid white;">71.3 </td>
+        <td>55.5 </td>
+        <td style="border-right: 2px solid white;">64.5 </td>
+        <td>54.5 </td>
+        <td>57.8 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Claude-3-haiku-20240307</td>
+        <td>59.7 </td>
+        <td style="border-right: 2px solid white;">70.6 </td>
+        <td>47.7 </td>
+        <td style="border-right: 2px solid white;">61.4 </td>
+        <td>52.8 </td>
+        <td>56.3 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Yi-34b-chat-0205</td>
+        <td>61.5 </td>
+        <td style="border-right: 2px solid white;">79.6 </td>
+        <td>49.4 </td>
+        <td style="border-right: 2px solid white;">61.1 </td>
+        <td>51.6 </td>
+        <td>57.5 </td>
+    </tr>
+    <tr>
+        <td style="border-right: 2px solid white;">Gemini-1.5-pro</td>
+        <td>63.0 </td>
+        <td style="border-right: 2px solid white;">79.7 </td>
+        <td>54.1 </td>
+        <td style="border-right: 2px solid white;">63.0 </td>
+        <td>53.8 </td>
+        <td>58.1</td>
+    </tr>
+</table></div>
+
+
+
+    
+  </div>
+</div>
+
+
+      </div>
+    </main>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      
+        <div class="col-lg">
+          <ul class="list-inline">
+            
+
+            
+
+            
+
+            
+
+            
+              <li class="list-inline-item">
+                <a href="https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+               
+          </ul>
+        </div>
+      
+
+      
+        <div class="col-lg">
+          
+
+
+          
+            <ul class="fa-ul">
+              
+                <li>
+                  <i class="fa-li fa fa-chevron-circle-right"></i>
+                  <a href="">Authors of Evaluating Large Language Models with Educational Knowledge Graphs - Challenges with Prerequisite Relationships and Multi-Hop Reasoning</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+
+    <div class="small mt-2">
+      
+      
+        <p>Content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0 License</a>. | Theme: <a href="https://github.com/peterdesmet/petridish">Petridish</a></p>
+
+      
+      
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/theme/js/anchor.min.js"></script>
+<script>
+  // Show anchors when hovering over headings, using anchor.js
+  (function () {
+    const headings = ".content h2[id], .content h3[id], .content h4[id], .content h5[id], .content h6[id]";
+    anchors.options = { placement: "right" };
+    anchors.add(headings);
+  })();
+</script>
+
+
+  </body>
+</html>
