@@ -21,6 +21,7 @@ Will update this section before NeurIPS 2024.
 ## Update Plan
 
 - We will benchmark more LLMs on the dataset provided in this work.
+- Current ongoing work: benchmarking Llama-3 and Qwen2-72B-Instruct.
 
 
 

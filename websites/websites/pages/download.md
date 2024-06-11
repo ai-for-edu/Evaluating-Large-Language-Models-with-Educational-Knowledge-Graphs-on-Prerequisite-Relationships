@@ -5,7 +5,7 @@ background: /assets/theme/images/Background_4_LLMS.png
 permalink: /download/
 ---
 
-Here are the links to download data. 
+Here are the links to download our curated data. Each dataset is a knowledge graph that includes knowledge components and their prerequisite relationships.
 
 The data can also be found in /data folder in the project GitHub Repo.
 
