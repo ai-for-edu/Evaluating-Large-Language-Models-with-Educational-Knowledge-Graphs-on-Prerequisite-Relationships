@@ -35,7 +35,7 @@ social:
   
 # Theme settings
 posts_on_home: 3
-github_edit: false # true                       # Show an "edit this page" link in the footer, can also be name of branch (default: main)
+github_edit: true                       # Show an "edit this page" link in the footer, can also be name of branch (default: main)
 colors:
   links: "#007bff"                      # Color for links: use a readable color that contrasts well with dark text
   banner: "#007bff"                     # Background color for page banners: use color that contrasts well with white

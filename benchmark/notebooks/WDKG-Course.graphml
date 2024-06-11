@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d1" for="node" attr.name="course_name" attr.type="string" />
+  <key id="d0" for="node" attr.name="id" attr.type="int" />
+  <graph edgedefault="directed">
+    <node id="1015">
+      <data key="d0">1015</data>
+      <data key="d1">计算机与信息技术</data>
+    </node>
+    <node id="1017">
+      <data key="d0">1017</data>
+      <data key="d1">高级语言程序设计(FORTRAN)</data>
+    </node>
+    <node id="1010">
+      <data key="d0">1010</data>
+      <data key="d1">高等数学A</data>
+    </node>
+    <node id="1018">
+      <data key="d0">1018</data>
+      <data key="d1">理论力学A</data>
+    </node>
+    <node id="1013">
+      <data key="d0">1013</data>
+      <data key="d1">大学物理B</data>
+    </node>
+    <node id="1019">
+      <data key="d0">1019</data>
+      <data key="d1">材料力学A</data>
+    </node>
+    <node id="1020">
+      <data key="d0">1020</data>
+      <data key="d1">结构力学A</data>
+    </node>
+    <node id="1021">
+      <data key="d0">1021</data>
+      <data key="d1">测量学</data>
+    </node>
+    <node id="1012">
+      <data key="d0">1012</data>
+      <data key="d1">概率统计</data>
+    </node>
+    <node id="1022">
+      <data key="d0">1022</data>
+      <data key="d1">土力学A</data>
+    </node>
+    <node id="1023">
+      <data key="d0">1023</data>
+      <data key="d1">水力学A</data>
+    </node>
+    <node id="1024">
+      <data key="d0">1024</data>
+      <data key="d1">电工及电气设备</data>
+    </node>
+    <node id="1026">
+      <data key="d0">1026</data>
+      <data key="d1">工程经济学B</data>
+    </node>
+    <node id="1027">
+      <data key="d0">1027</data>
+      <data key="d1">工程材料</data>
+    </node>
+    <node id="1029">
+      <data key="d0">1029</data>
+      <data key="d1">工程水文学A</data>
+    </node>
+    <node id="1011">
+      <data key="d0">1011</data>
+      <data key="d1">线性代数A</data>
+    </node>
+    <node id="1031">
+      <data key="d0">1031</data>
+      <data key="d1">水工钢结构A</data>
+    </node>
+    <node id="5010">
+      <data key="d0">5010</data>
+      <data key="d1">建筑材料</data>
+    </node>
+    <node id="1032">
+      <data key="d0">1032</data>
+      <data key="d1">水工钢筋混凝土结构学</data>
+    </node>
+    <node id="1034">
+      <data key="d0">1034</data>
+      <data key="d1">水工建筑物A</data>
+    </node>
+    <node id="1033">
+      <data key="d0">1033</data>
+      <data key="d1">水利水能规划A</data>
+    </node>
+    <node id="1035">
+      <data key="d0">1035</data>
+      <data key="d1">水电站A</data>
+    </node>
+    <node id="1037">
+      <data key="d0">1037</data>
+      <data key="d1">弹性力学</data>
+    </node>
+    <node id="1038">
+      <data key="d0">1038</data>
+      <data key="d1">有限元程序设计</data>
+    </node>
+    <node id="1040">
+      <data key="d0">1040</data>
+      <data key="d1">水利工程制图及CAD技术</data>
+    </node>
+    <node id="1016">
+      <data key="d0">1016</data>
+      <data key="d1">工程图学概论(土建类)</data>
+    </node>
+    <node id="1041">
+      <data key="d0">1041</data>
+      <data key="d1">生态水工学</data>
+    </node>
+    <node id="1046">
+      <data key="d0">1046</data>
+      <data key="d1">水工结构模型实验</data>
+    </node>
+    <node id="1036">
+      <data key="d0">1036</data>
+      <data key="d1">水利工程施工A</data>
+    </node>
+    <node id="1047">
+      <data key="d0">1047</data>
+      <data key="d1">工程项目管理</data>
+    </node>
+    <node id="1050">
+      <data key="d0">1050</data>
+      <data key="d1">水工结构有限元分析</data>
+    </node>
+    <node id="5011">
+      <data key="d0">5011</data>
+      <data key="d1">水利工程地质B</data>
+    </node>
+    <node id="5012">
+      <data key="d0">5012</data>
+      <data key="d1">工程水文学B</data>
+    </node>
+    <node id="5013">
+      <data key="d0">5013</data>
+      <data key="d1">水工钢筋混凝土结构学A</data>
+    </node>
+    <node id="5014">
+      <data key="d0">5014</data>
+      <data key="d1">港口规划与布置</data>
+    </node>
+    <node id="5015">
+      <data key="d0">5015</data>
+      <data key="d1">河流动力学</data>
+    </node>
+    <node id="5018">
+      <data key="d0">5018</data>
+      <data key="d1">河床演变与河道整治</data>
+    </node>
+    <node id="5019">
+      <data key="d0">5019</data>
+      <data key="d1">航道整治</data>
+    </node>
+    <node id="5026">
+      <data key="d0">5026</data>
+      <data key="d1">地球科学概论</data>
+    </node>
+    <node id="5028">
+      <data key="d0">5028</data>
+      <data key="d1">水利工程制图及CAD技术</data>
+    </node>
+    <node id="5029">
+      <data key="d0">5029</data>
+      <data key="d1">环境水利</data>
+    </node>
+    <node id="5031">
+      <data key="d0">5031</data>
+      <data key="d1">工程建设法规及安全环保</data>
+    </node>
+    <node id="5033">
+      <data key="d0">5033</data>
+      <data key="d1">工程伦理学</data>
+    </node>
+    <node id="5037">
+      <data key="d0">5037</data>
+      <data key="d1">3S系统</data>
+    </node>
+    <node id="5039">
+      <data key="d0">5039</data>
+      <data key="d1">桩基工程</data>
+    </node>
+    <node id="5042">
+      <data key="d0">5042</data>
+      <data key="d1">桥梁工程</data>
+    </node>
+    <edge source="1015" target="1017" />
+    <edge source="1015" target="1026" />
+    <edge source="1017" target="1038" />
+    <edge source="1010" target="1018" />
+    <edge source="1010" target="1021" />
+    <edge source="1010" target="1024" />
+    <edge source="1010" target="1027" />
+    <edge source="1010" target="1029" />
+    <edge source="1010" target="5010" />
+    <edge source="1010" target="5012" />
+    <edge source="1010" target="5015" />
+    <edge source="1010" target="5026" />
+    <edge source="1010" target="5037" />
+    <edge source="1018" target="1019" />
+    <edge source="1018" target="1023" />
+    <edge source="1018" target="5015" />
+    <edge source="1013" target="1018" />
+    <edge source="1013" target="1024" />
+    <edge source="1013" target="5012" />
+    <edge source="1013" target="5026" />
+    <edge source="1013" target="5037" />
+    <edge source="1019" target="1020" />
+    <edge source="1019" target="1022" />
+    <edge source="1019" target="1027" />
+    <edge source="1019" target="5010" />
+    <edge source="1019" target="5011" />
+    <edge source="1020" target="1031" />
+    <edge source="1020" target="1032" />
+    <edge source="1020" target="1050" />
+    <edge source="1020" target="5013" />
+    <edge source="1021" target="5037" />
+    <edge source="1012" target="1021" />
+    <edge source="1012" target="1026" />
+    <edge source="1012" target="1027" />
+    <edge source="1012" target="1033" />
+    <edge source="1012" target="5010" />
+    <edge source="1012" target="5012" />
+    <edge source="1012" target="5014" />
+    <edge source="1022" target="1034" />
+    <edge source="1023" target="1033" />
+    <edge source="1023" target="1034" />
+    <edge source="1023" target="5012" />
+    <edge source="1023" target="5014" />
+    <edge source="1023" target="5015" />
+    <edge source="1023" target="5018" />
+    <edge source="1023" target="5019" />
+    <edge source="1026" target="1033" />
+    <edge source="1027" target="1026" />
+    <edge source="1027" target="5013" />
+    <edge source="1027" target="5042" />
+    <edge source="1029" target="1033" />
+    <edge source="1011" target="1029" />
+    <edge source="5010" target="1031" />
+    <edge source="5010" target="1032" />
+    <edge source="1034" target="1032" />
+    <edge source="1034" target="1035" />
+    <edge source="1034" target="1041" />
+    <edge source="1034" target="1046" />
+    <edge source="1033" target="1035" />
+    <edge source="1037" target="1038" />
+    <edge source="1037" target="1050" />
+    <edge source="1040" target="1038" />
+    <edge source="1016" target="1040" />
+    <edge source="1016" target="5028" />
+    <edge source="1036" target="1047" />
+    <edge source="5012" target="5018" />
+    <edge source="5013" target="5039" />
+    <edge source="5013" target="5042" />
+    <edge source="5015" target="5018" />
+    <edge source="5015" target="5019" />
+    <edge source="5019" target="5019" />
+    <edge source="5029" target="5031" />
+    <edge source="5033" target="5031" />
+  </graph>
+</graphml>
