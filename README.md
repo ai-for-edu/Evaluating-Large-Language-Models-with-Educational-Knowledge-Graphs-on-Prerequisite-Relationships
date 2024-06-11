@@ -1,7 +1,7 @@
 # :sparkles: Evaluating Large Language Models with Educational Knowledge Graphs: Challenges with Prerequisite Relationships and Multi-Hop Reasoning :sparkles:
 
 <p align="center">
-  <img src="websites/websites/assets/theme/iamges/favicon.png" alt="Project Icon" width="150"/>
+  <img src="websites/websites/assets/theme/images/favicon.png" alt="Project Icon" width="150"/>
 </p>
 
 
