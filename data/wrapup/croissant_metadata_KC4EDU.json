@@ -1,0 +1,147 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "Knowledge Graph Dataset with Knowledge Components and Prerequisite Relationships",
+  "description": "This dataset contains knowledge graphs in JSON format. The graphs represent knowledge components and their prerequisite relationships in education context.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "citeAs": "\n@misc{wang2024evaluating,\n  author = {Aoran Wang and Chaoli Zhang and Jun Pang and Qingsong Wen},\n  title = {Evaluating Large Language Models with Educational Knowledge Graphs: Challenges with Prerequisite Relationships and Multi-Hop Reasoning},\n  year = {2024},\n  publisher = {GitHub},\n  journal = {GitHub repository},\n  howpublished = {\\url{https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships}},\n  note = {Accessed: 2024-06-05}\n}\n",
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "sameAs": "https://huggingface.co/datasets/RalfWang/KCs4EDU",
+  "url": "https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships",
+  "version": "1.0.0",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "github-repository",
+      "name": "github-repository",
+      "description": "Repository of Evaluating Large Language Models with Educational Knowledge Graphs: Challenges with Prerequisite Relationships and Multi-Hop Reasoning.",
+      "contentUrl": "https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships",
+      "encodingFormat": "git+https",
+      "sha256": "main"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "json-files",
+      "name": "json-files",
+      "description": "JSON files contained in the repository.",
+      "containedIn": {
+        "@id": "github-repository"
+      },
+      "encodingFormat": "application/json",
+      "includes": "data/wrapup/*.json"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "json",
+      "name": "json",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "json/DBE-KT22",
+          "name": "DBE-KT22",
+          "description": "DBE-KT22 dataset.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "json-files"
+            },
+            "extract": {
+              "column": "DBE-KT22"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "json/WDKG-Course",
+          "name": "WDKG-Course",
+          "description": "WDKG-Course dataset.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "json-files"
+            },
+            "extract": {
+              "column": "WDKG-Course"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "json/WDKG-KnowledgePoints",
+          "name": "WDKG-KnowledgePoints",
+          "description": "WDKG-KnowledgePoints dataset.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "json-files"
+            },
+            "extract": {
+              "column": "WDKG-KnowledgePoints"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "json/Junyi-Prerequisites",
+          "name": "Junyi-Prerequisites",
+          "description": "Junyi-Prerequisites dataset.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "json-files"
+            },
+            "extract": {
+              "column": "Junyi-Prerequisites"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
