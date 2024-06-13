@@ -5,7 +5,8 @@
 </p>
 
 
-![Last Commit](https://img.shields.io/github/last-commit/divelab/DIG)
+![Last Commit](https://img.shields.io/github/last-commit/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships
+)
 [![CC BY 4.0][cc-by-shield]][cc-by]
 
 This work is licensed under a
@@ -72,7 +73,12 @@ As this step may require manual check, we provide some methods may be helpful to
 
 ## Dataset
 
-The KGs with KCs and prerequsites relationships dataset are in /data folder with each subfolder inside holding one KG. 
+The KGs with KCs and prerequsites relationships dataset are in /data folder with each subfolder inside holding one GraphML for one KG. 
+Or can also download all of them at once from /data/wrapup/ folder, which contains all GraphML files and corresponding JSON files.
+
+The Croissant Metadata is at [Link to File](https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships/blob/main/data/wrapup/croissant_metadata_KC4EDU.json).
+
+A duplicate of the GraphML dataset can also be found at HugginFace: [Link to Data](https://huggingface.co/datasets/RalfWang/KCs4EDU).
 
 
 ## Citation

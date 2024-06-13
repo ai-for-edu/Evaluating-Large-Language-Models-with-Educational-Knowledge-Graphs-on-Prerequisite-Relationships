@@ -32,3 +32,7 @@ The data can also be found in /data folder in the project GitHub Repo.
         <td><a href="https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships/blob/main/data/Junyi/Junyi-Prerequisites.graphml">Link</a></td>
     </tr>
 </table>
+
+The Croissant Metadata is at [Link to File](https://github.com/ai-for-edu/Evaluating-Large-Language-Models-with-Educational-Knowledge-Graphs-on-Prerequisite-Relationships/blob/main/data/wrapup/croissant_metadata_KC4EDU.json).
+
+A duplicate of the GraphML dataset can also be found at HugginFace: [Link to Data](https://huggingface.co/datasets/RalfWang/KCs4EDU).
